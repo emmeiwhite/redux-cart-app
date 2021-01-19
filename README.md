@@ -1,3 +1,9 @@
+## This is a new world of Redux. Redux is a state management library
+
+1. First we create our single source of truth (the store/ the state) using `createStore` function `redux`.
+
+2. `createStore` takes in `reducer` which is simply a function.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
