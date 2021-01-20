@@ -15,6 +15,25 @@ const reducer = (state, action) => {
         total: state.total - action.payload.price,
       };
     }
+
+    const updatedCartItems = state.cart.map((cartItem) => {
+      if (cartItem.id === action.payload.id) {
+        const updatedCartItem = {
+          ...cartItem,
+          amount: cartItem.amount - 1,
+        };
+        return updatedCartItem;
+      }
+      return cartItem;
+    });
+
+    console.log(updatedCartItems);
+    return {
+      ...state,
+      cart: updatedCartItems,
+      totalItems: state.totalItems - 1,
+      total: state.total - action.payload.price,
+    };
   }
 
   if (action.type === INCREASE) {
