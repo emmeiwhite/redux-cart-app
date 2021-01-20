@@ -3,7 +3,7 @@ import CartItem from "./CartItem";
 
 import { connect } from "react-redux";
 
-const CartContainer = ({ cart = [] }) => {
+const CartContainer = ({ cart = [], total = 0 }) => {
   if (cart.length === 0) {
     return (
       <section className="cart">
@@ -32,7 +32,7 @@ const CartContainer = ({ cart = [] }) => {
         <hr />
         <div className="cart-total">
           <h4>
-            total <span>$0.00</span>
+            total <span>${total}</span>
           </h4>
         </div>
         <button className="btn clear-btn">clear cart</button>
@@ -40,9 +40,10 @@ const CartContainer = ({ cart = [] }) => {
     </section>
   );
 };
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     cart: state.cart,
+    total: state.total,
   };
 };
 export default connect(mapStateToProps)(CartContainer);
