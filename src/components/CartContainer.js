@@ -1,6 +1,8 @@
 import React from "react";
 import CartItem from "./CartItem";
 
+import { connect } from "react-redux";
+
 const CartContainer = ({ cart = [] }) => {
   if (cart.length === 0) {
     return (
@@ -38,5 +40,9 @@ const CartContainer = ({ cart = [] }) => {
     </section>
   );
 };
-
-export default CartContainer;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    cart: state.cart,
+  };
+};
+export default connect(mapStateToProps)(CartContainer);
