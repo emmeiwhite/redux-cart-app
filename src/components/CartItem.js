@@ -10,7 +10,7 @@ const CartItem = ({ id, img, title, price, amount, remove }) => {
         <h4>{title}</h4>
         <h4 className="item-price">${price}</h4>
         {/* remove button */}
-        <button className="remove-btn" onClick={() => remove({ id, price })}>
+        <button className="remove-btn" onClick={() => remove()}>
           remove
         </button>
       </div>
@@ -34,9 +34,20 @@ const CartItem = ({ id, img, title, price, amount, remove }) => {
   );
 };
 
+/*
 const mapDispatchToProps = (dispatch) => {
   return {
     remove: (obj) => dispatch({ type: REMOVE, payload: obj }),
+  };
+};
+*/
+
+/** --- USING ownProps | Also works fine--- */
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const { id, price } = ownProps;
+  return {
+    remove: (obj) => dispatch({ type: REMOVE, payload: { id, price } }),
   };
 };
 export default connect(null, mapDispatchToProps)(CartItem);
