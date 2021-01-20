@@ -6,17 +6,39 @@ const reducer = (state, action) => {
   }
 
   if (action.type === DECREASE) {
-    console.log("you decreased amount");
+    if (action.payload.amount === 1) {
+      // Removing item from the cart list
+      return {
+        ...state,
+        cart: state.cart.filter((item) => item.id !== action.payload.id),
+        totalItems: state.totalItems - 1,
+        total: state.total - action.payload.price,
+      };
+    }
   }
 
   if (action.type === INCREASE) {
-    console.log("you increased amount");
+    const updatedCartItems = state.cart.map((cartItem) => {
+      if (cartItem.id === action.payload.id) {
+        const updatedCartItem = {
+          ...cartItem,
+          amount: cartItem.amount + 1,
+        };
+        return updatedCartItem;
+      }
+      return cartItem;
+    });
+
+    console.log(updatedCartItems);
+    return {
+      ...state,
+      cart: updatedCartItems,
+      totalItems: state.totalItems + 1,
+      total: state.total + action.payload.price,
+    };
   }
 
   if (action.type === REMOVE) {
-    console.log("Payload passed is:");
-    console.log(action.payload);
-
     return {
       ...state,
       cart: state.cart.filter((item) => item.id !== action.payload.id),
