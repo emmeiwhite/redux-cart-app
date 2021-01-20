@@ -14,7 +14,15 @@ const reducer = (state, action) => {
   }
 
   if (action.type === REMOVE) {
-    console.log("you removed amount");
+    console.log("Payload passed is:");
+    console.log(action.payload);
+
+    return {
+      ...state,
+      cart: state.cart.filter((item) => item.id !== action.payload.id),
+      totalItems: state.totalItems - 1,
+      total: state.total - action.payload.price,
+    };
   }
   return state;
 };

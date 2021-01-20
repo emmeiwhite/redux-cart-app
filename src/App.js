@@ -14,10 +14,15 @@ import { INCREASE, DECREASE } from "./actions";
 
 import { Provider } from "react-redux";
 
+// Getting Initial Total
+const initialTotal = cartItems.reduce((acc, item) => {
+  return (acc = acc + item.price);
+}, 0);
+
 const initialState = {
   cart: cartItems,
-  total: 105,
-  totalItems: 5,
+  total: initialTotal,
+  totalItems: 3,
 };
 
 const store = createStore(reducer, initialState);
